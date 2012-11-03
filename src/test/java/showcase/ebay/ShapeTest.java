@@ -4,6 +4,11 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+/**
+ * 
+ * @author Xiang Cheng
+ * 
+ */
 public class ShapeTest {
 	private static final double DELTA = 0;
 
@@ -36,7 +41,7 @@ public class ShapeTest {
 		shape1.connect(shape2);
 		verifyDirectConnectionCount(1, shape1, shape2);
 		verifyPower(2, shape1, shape2);
-		
+
 		shape1.connect(shape2);
 		verifyDirectConnectionCount(1, shape1, shape2);
 		verifyPower(2, shape1, shape2);
@@ -44,6 +49,12 @@ public class ShapeTest {
 		shape2.connect(shape1);
 		verifyDirectConnectionCount(1, shape1, shape2);
 		verifyPower(2, shape1, shape2);
+
+		Shape shape22 = getMockShape(2);
+		shape22.connect(shape1);
+		verifyDirectConnectionCount(1, shape22, shape2);
+		verifyDirectConnectionCount(2, shape1);
+		verifyPower(2, shape1, shape2, shape22);
 	}
 
 	@Test
@@ -51,7 +62,7 @@ public class ShapeTest {
 		Shape shape1 = getMockShape(1);
 		Shape shape2 = getMockShape(2);
 		Shape shape3 = getMockShape(3);
-		shape1.connect(shape2); 
+		shape1.connect(shape2);
 		shape2.connect(shape3);
 		verifyDirectConnectionCount(1, shape1, shape3);
 		verifyDirectConnectionCount(2, shape2);
@@ -62,33 +73,46 @@ public class ShapeTest {
 		verifyPower(3, shape1, shape2, shape3);
 		verifyDirectConnectionCount(2, shape1, shape2, shape3);
 		verifyPower(3, shape1, shape2, shape3);
-		
+
 		shape1.connect(shape3);
 		verifyDirectConnectionCount(2, shape1, shape3);
 		verifyDirectConnectionCount(2, shape1, shape2, shape3);
 		verifyPower(3, shape1, shape2, shape3);
-	} 
+	}
+
 	@Test
 	public void testConnectExternally() {
 		Shape shape1 = getMockShape(1);
 		Shape shape2 = getMockShape(2);
 		Shape shape3 = getMockShape(3);
-		shape1.connect(shape2); 
-		shape2.connect(shape3); 
-		verifyDirectConnectionCount(1, shape1, shape3); 
-		verifyDirectConnectionCount(2, shape2); 
-		verifyPower(3, shape1, shape2, shape3); 
-		
+		shape1.connect(shape2);
+		shape2.connect(shape3);
+		verifyDirectConnectionCount(1, shape1, shape3);
+		verifyDirectConnectionCount(2, shape2);
+		verifyPower(3, shape1, shape2, shape3);
+
+		Shape shape4 = getMockShape(4);
+		Shape shape5 = getMockShape(5);
+		Shape shape6 = getMockShape(6);
+		shape4.connect(shape5);
+		shape5.connect(shape6);
+		shape4.connect(shape6);
+
+		verifyDirectConnectionCount(2, shape4, shape5, shape6);
+		verifyPower(6, shape4, shape5, shape6);
+
+		shape1.connect(shape5);
+		verifyDirectConnectionCount(1, shape3);
+		verifyDirectConnectionCount(2, shape1, shape2, shape4, shape6);
+		verifyDirectConnectionCount(3, shape5);
+		verifyPower(6, shape1, shape2, shape3);
 	}
-	
-	
 
 	@Test
 	public void testGetPower() {
 		Shape shape = getMockShape(1);
 		assertEquals("Single shape power should equals to its area", 1,
 				shape.getPower(), DELTA);
-
 	}
 
 	@Test

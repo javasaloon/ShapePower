@@ -1,4 +1,2 @@
-PowerShape
-==========
 
-This is a showcase project.
+This is a study project.
