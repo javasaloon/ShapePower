@@ -56,16 +56,19 @@ class PowerGraph {
 	}
 
 	private void bind(Collection<? extends Shape> vertices2) {
-		for (Shape shape : vertices2) {
-			bind(shape);
+		if (vertices2 == null) {
+			return;
+		}
+		for (Shape vertex : vertices2) {
+			vertex.bind(this);
+			this.vertices.add(vertex);
 		}
 	}
 
-	private void bind(Shape vertex) {
-		vertex.bind(this);
-		this.vertices.add(vertex);
-	}
-
+	/**
+	 * 
+	 * @return the power which is the biggest area among the vertices.
+	 */
 	public float getPower() {
 		return this.power;
 	}
