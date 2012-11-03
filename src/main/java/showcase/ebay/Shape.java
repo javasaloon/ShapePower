@@ -12,9 +12,8 @@ import java.util.Set;
  */
 public abstract class Shape {
 	protected float area = 0;
-
+	private Set<Shape> directConnections = null;
 	private PowerGraph powerGraph = null;
-	private Set<Shape> directConnections = new HashSet<Shape>();
 
 	/**
 	 * Build bidirectional connection with the input <tt>shape</tt>. And merge
@@ -27,26 +26,29 @@ public abstract class Shape {
 	public Shape connect(Shape shape) {
 		if (shape == null || shape == this || connected(shape)) {
 			return this;
+		} 
+		if (this.directConnections == null) {
+			this.directConnections = new HashSet<Shape>();
 		}
-		// build bidirectional connection
-		this.directConnections.add(shape);
+		this.directConnections.add(shape); 
+		
+		if (shape.directConnections == null) {
+			shape.directConnections = new HashSet<Shape>();
+		}
 		shape.directConnections.add(this);
-
-		// TODO optimize
-		if (this.powerGraph == null) {
-			this.powerGraph = new PowerGraph(this);
-		}
-		if (shape.powerGraph == null) {
-			shape.powerGraph = new PowerGraph(shape);
-		}
-		 
-		this.powerGraph.merge(shape.powerGraph);
-
+		
+		mergePowerGraph(shape);
+		
 		return this;
 	}
 
+	/**
+	 * Return its area if it has no connections.
+	 * 
+	 * @return
+	 */
 	public float getPower() {
-		if (this.powerGraph == null) {
+		if (this.directConnections == null || this.directConnections.isEmpty()) {
 			return this.getArea();
 		}
 		return this.powerGraph.getPower();
@@ -69,6 +71,24 @@ public abstract class Shape {
 	protected abstract float calculateArea();
 
 	/**
+	 * Pick powerGraph whose power is bigger.
+	 * 
+	 * @param shape
+	 */
+	private void mergePowerGraph(Shape shape) {
+		if (shape == null) {
+			return;
+		}
+		if (this.powerGraph == null) {
+			this.powerGraph = new PowerGraph(this);
+		}
+		if (shape.powerGraph == null) {
+			shape.powerGraph = new PowerGraph(shape);
+		}
+		this.powerGraph.merge(shape.powerGraph);
+	}
+
+	/**
 	 * Test if the input <tt>shape</tt> has been in the
 	 * <tt>directConnections</tt> which means there is a reference to the input
 	 * <tt>shape</tt>.
@@ -77,7 +97,10 @@ public abstract class Shape {
 	 * @return
 	 */
 	private boolean connected(Shape shape) {
-		for (Shape connection : directConnections) {
+		if (shape == null || this.directConnections == null) {
+			return false;
+		}
+		for (Shape connection : this.directConnections) {
 			if (connection == shape) {
 				return true;
 			}
@@ -85,7 +108,18 @@ public abstract class Shape {
 		return false;
 	}
 
-	void bind(PowerGraph powerGraph) {
+	/**
+	 * Bind this shape on the input <tt>powerGraph</tt> which should be not
+	 * null.
+	 * 
+	 * @param powerGraph
+	 * @throws NullPointerException
+	 *             if input <tt>powerGraph</tt> is null.
+	 */
+	final void bind(PowerGraph powerGraph) {
+		if (powerGraph == null) {
+			throw new NullPointerException();
+		}
 		this.powerGraph = powerGraph;
 	}
 

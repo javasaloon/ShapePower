@@ -15,12 +15,12 @@ public class ShapeTest {
 	@Test
 	public void testConnectNull() {
 		Shape shape1 = getMockShape(1);
-		verifyDirectConnectionCount(0, shape1);
+		verifyNullConnection(shape1);
 		verifyPower(1, shape1);
 		Shape connectedShape = shape1.connect(null);
 		assertEquals("shape.connect(null) should ignore silently", shape1,
 				connectedShape);
-		verifyDirectConnectionCount(0, shape1);
+		verifyNullConnection(shape1);
 		verifyPower(1, shape1);
 	}
 
@@ -30,7 +30,7 @@ public class ShapeTest {
 		Shape connectedShape = shape1.connect(shape1);
 		assertEquals("shape.connect(itself) should return itself", shape1,
 				connectedShape);
-		verifyDirectConnectionCount(0, shape1);
+		verifyNullConnection(shape1);
 		verifyPower(1, shape1);
 	}
 
@@ -133,6 +133,14 @@ public class ShapeTest {
 			assertEquals(
 					"The direct connection count of the shape should be expected. ",
 					expectedCount, shape.getDirectConnections().size());
+		}
+	}
+
+	private void verifyNullConnection(Shape... shapes) {
+		for (Shape shape : shapes) {
+			assertNull(
+					"The direct connection count of the shape should be expected. ",
+					shape.getDirectConnections());
 		}
 	}
 

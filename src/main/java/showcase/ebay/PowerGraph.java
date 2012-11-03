@@ -1,8 +1,8 @@
 package showcase.ebay;
 
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 /**
  * This is used for <tt>Shape</tt> to help keep and calculate the power. This
@@ -12,9 +12,9 @@ import java.util.Set;
  * @author Xiang Cheng
  * 
  */
-class PowerGraph {
+final class PowerGraph {
 	private float power = 0;
-	private Set<Shape> vertices = null;
+	private List<Shape> vertices = null;
 
 	/**
 	 * Construct a new <tt>PowerGraph</tt> with the input <tt>vertex</tt>. Leave
@@ -26,7 +26,7 @@ class PowerGraph {
 	 */
 	public PowerGraph(Shape vertex) {
 		super();
-		vertices = new HashSet<Shape>();
+		vertices = new ArrayList<Shape>();
 		if (vertex != null) {
 			this.power = vertex.getArea();
 			this.vertices.add(vertex);
@@ -55,11 +55,11 @@ class PowerGraph {
 		}
 	}
 
-	private void bind(Collection<? extends Shape> vertices2) {
-		if (vertices2 == null) {
+	private void bind(Collection<? extends Shape> newVertices) {
+		if (newVertices == null) {
 			return;
 		}
-		for (Shape vertex : vertices2) {
+		for (Shape vertex : newVertices) {
 			vertex.bind(this);
 			this.vertices.add(vertex);
 		}
