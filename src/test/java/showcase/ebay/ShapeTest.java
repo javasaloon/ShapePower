@@ -154,13 +154,10 @@ public class ShapeTest {
 	private Shape getMockShape(final float mockArea) {
 		Shape shape = new Shape() {
 			@Override
-			public float calculateArea() {
-				this.area = mockArea;
-				return this.area;
+			public float getArea() {
+				return mockArea;
 			}
 		};
-		// TODO How to enforce this
-		shape.calculateArea();
 		return shape;
 	}
 
