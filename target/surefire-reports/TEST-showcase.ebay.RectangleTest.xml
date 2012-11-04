@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite failures="0" time="0.006" errors="0" skipped="0" tests="7" name="showcase.ebay.RectangleTest">
+<testsuite failures="0" time="0.003" errors="0" skipped="0" tests="7" name="showcase.ebay.RectangleTest">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.6.0_25\jre\bin"/>
@@ -19,7 +19,7 @@
     <property name="basedir" value="C:\Users\Administrator\workspace-android\ShapePower"/>
     <property name="java.endorsed.dirs" value="C:\Program Files\Java\jdk1.6.0_25\jre\lib\endorsed"/>
     <property name="os.arch" value="x86"/>
-    <property name="surefire.real.class.path" value="C:\Users\Administrator\workspace-android\ShapePower\target\surefire\surefirebooter7901894098062085745.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\Administrator\workspace-android\ShapePower\target\surefire\surefirebooter3888643178590353577.jar"/>
     <property name="java.io.tmpdir" value="C:\cygwin\tmp\"/>
     <property name="line.separator" value="
 "/>
@@ -43,7 +43,7 @@
     <property name="java.vm.specification.version" value="1.0"/>
     <property name="sun.arch.data.model" value="32"/>
     <property name="java.home" value="C:\Program Files\Java\jdk1.6.0_25\jre"/>
-    <property name="sun.java.command" value="C:\Users\Administrator\workspace-android\ShapePower\target\surefire\surefirebooter7901894098062085745.jar C:\Users\Administrator\workspace-android\ShapePower\target\surefire\surefire9131144050427362013tmp C:\Users\Administrator\workspace-android\ShapePower\target\surefire\surefire8647535621967656933tmp"/>
+    <property name="sun.java.command" value="C:\Users\Administrator\workspace-android\ShapePower\target\surefire\surefirebooter3888643178590353577.jar C:\Users\Administrator\workspace-android\ShapePower\target\surefire\surefire9064708690850358541tmp C:\Users\Administrator\workspace-android\ShapePower\target\surefire\surefire7093271257090847182tmp"/>
     <property name="java.specification.vendor" value="Sun Microsystems Inc."/>
     <property name="user.language" value="zh"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
@@ -61,8 +61,8 @@
     <property name="sun.cpu.isalist" value="pentium_pro+mmx pentium_pro pentium+mmx pentium i486 i386 i86"/>
   </properties>
   <testcase time="0" classname="showcase.ebay.RectangleTest" name="testGetArea"/>
-  <testcase time="0" classname="showcase.ebay.RectangleTest" name="testRectangleIllegalWidth"/>
-  <testcase time="0.001" classname="showcase.ebay.RectangleTest" name="testRectangleIllegalHeight"/>
+  <testcase time="0.001" classname="showcase.ebay.RectangleTest" name="testRectangleIllegalWidth"/>
+  <testcase time="0" classname="showcase.ebay.RectangleTest" name="testRectangleIllegalHeight"/>
   <testcase time="0" classname="showcase.ebay.RectangleTest" name="testRectangleIllegalHeightWidth"/>
   <testcase time="0" classname="showcase.ebay.RectangleTest" name="testGetPower"/>
   <testcase time="0" classname="showcase.ebay.RectangleTest" name="testGetDirectConnections"/>

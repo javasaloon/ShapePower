@@ -11,7 +11,8 @@ public class Rectangle extends Shape {
 
 	/**
 	 * 
-	 * @param radius
+	 * @param width
+	 * @param height
 	 * @throws IllegalArgumentException
 	 *             when the input <tt>width</tt> or <tt>height</tt> is not
 	 *             larger than 0.
