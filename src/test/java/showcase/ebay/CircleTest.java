@@ -26,7 +26,7 @@ public class CircleTest {
 	@Test
 	public void testGetPowerEqualsArea() {
 		Circle circle = new Circle(3);
-		assertEquals("The shape power should equals to the expected. ",
+		assertEquals("The shape power should equals to its area. ",
 				circle.getArea(), circle.getPower(), DELTA);
 	}
 

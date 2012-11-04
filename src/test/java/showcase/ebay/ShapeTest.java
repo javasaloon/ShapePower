@@ -13,6 +13,12 @@ import org.junit.Test;
  * 
  */
 public class ShapeTest {
+	@Test(expected = IllegalArgumentException.class)
+	public void testConnectIllegalArea() {
+		Shape shape1 = getMockShape(1);
+		Shape shape2 = getMockShape(-2);
+		shape1.connect(shape2);
+	}
 
 	@Test
 	public void testConnectNull() {
@@ -34,13 +40,6 @@ public class ShapeTest {
 				connectedShape);
 		verifyNullConnection(shape1);
 		verifyPower(1, shape1);
-	}
-	
-	@Test(expected = IllegalArgumentException.class)
-	public void testConnectIllegalArea() {
-		Shape shape1 = getMockShape(1);
-		Shape shape2 = getMockShape(-2);
-		shape1.connect(shape2);
 	}
 
 	@Test
@@ -90,22 +89,6 @@ public class ShapeTest {
 	}
 
 	@Test
-	public void testGetDirectConnections() {
-		Shape shape1 = getMockShape(1);
-		Shape shape2 = getMockShape(2);
-		Shape shape3 = getMockShape(3);
-
-		shape1.connect(shape3);
-		verifyDirectConnectionCount(1, shape1, shape3);
-		List<Shape> connections = shape1.getDirectConnections();
-		// This should not effect the directConnections of rectangle15
-		connections.add(shape2);
-		assertEquals("connections should have two items. ", 2,
-				connections.size());
-		verifyDirectConnectionCount(1, shape1, shape3);
-	}
-
-	@Test
 	public void testConnectExternally() {
 		Shape shape1 = getMockShape(1);
 		Shape shape2 = getMockShape(2);
@@ -134,9 +117,25 @@ public class ShapeTest {
 	}
 
 	@Test
+	public void testGetDirectConnections() {
+		Shape shape1 = getMockShape(1);
+		Shape shape2 = getMockShape(2);
+		Shape shape3 = getMockShape(3);
+
+		shape1.connect(shape3);
+		verifyDirectConnectionCount(1, shape1, shape3);
+		List<Shape> connections = shape1.getDirectConnections();
+		// This should not effect the directConnections of shape2
+		connections.add(shape2);
+		assertEquals("connections should have two items. ", 2,
+				connections.size());
+		verifyDirectConnectionCount(1, shape1, shape3);
+	}
+
+	@Test
 	public void testGetPower() {
 		Shape shape = getMockShape(1);
-		assertEquals("Single shape power should equals to its area", 1,
+		assertEquals("Single shape power should equals to its area", shape.getArea(),
 				shape.getPower(), DELTA);
 	}
 

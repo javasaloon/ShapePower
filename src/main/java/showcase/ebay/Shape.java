@@ -6,7 +6,13 @@ import java.util.List;
 
 /**
  * This is an abstract <tt>Shape</tt> class and hope the subclass to implement
- * the abstract method {@link #getArea()}
+ * the abstract method {@link #getArea()}.
+ * <p>
+ * It offers power of the connection chain through {@link #getPower()} after it
+ * connects to other shapes. The power is the biggest area in all its directly
+ * or indirectly connected shapes. The power equals to its area provided by
+ * {@link #getArea()} before it connects to others.
+ * </p>
  * 
  * @author Xiang Cheng
  * 
@@ -21,8 +27,12 @@ public abstract class Shape {
 	 * is null, the same as itself or has connected with it.
 	 * 
 	 * @param shape
-	 * @return itself
+	 * @return <tt>this</tt>
+	 * @throws IllegalArgumentException
+	 *             when the {@link #getArea()} of the input <tt>shape</tt>
+	 *             returns value which is not larger than 0.
 	 */
+
 	public final Shape connect(Shape shape) {
 		if (shape == null || shape == this || connected(shape)) {
 			return this;
@@ -47,9 +57,8 @@ public abstract class Shape {
 	}
 
 	/**
-	 * Return its area if it has no connections.
 	 * 
-	 * @return
+	 * @return its area if it has no connections.
 	 */
 	public final double getPower() {
 		if (this.directConnections == null || this.directConnections.isEmpty()) {
@@ -74,18 +83,12 @@ public abstract class Shape {
 	}
 
 	/**
-	 * Concrete <tt>Shape</tt> class should provide its implementation
-	 * accordingly.
+	 * Return the area of the shape which should be larger than 0.
 	 * 
-	 * @return the area value.
+	 * @return
 	 */
 	protected abstract double getArea();
 
-	/**
-	 * Pick powerGraph whose power is bigger.
-	 * 
-	 * @param shape
-	 */
 	private void mergePowerGraph(Shape shape) {
 		if (shape == null) {
 			return;
@@ -120,7 +123,7 @@ public abstract class Shape {
 	}
 
 	/**
-	 * Bind this shape on the input <tt>powerGraph</tt> which should be not
+	 * Bind this shape on the input <tt>powerGraph</tt> which should not be
 	 * null.
 	 * 
 	 * @param powerGraph
@@ -137,7 +140,7 @@ public abstract class Shape {
 	/**
 	 * This is used for <tt>Shape</tt> to help keep and calculate the power.
 	 * This class holds all the <tt>Shape</tt> vertices in it and their power
-	 * which is the biggest area among the vertices. 
+	 * which is the biggest area among the vertices.
 	 * 
 	 * @author Xiang Cheng
 	 * 
@@ -148,8 +151,8 @@ public abstract class Shape {
 
 		/**
 		 * Construct a new <tt>PowerGraph</tt> with the input <tt>vertex</tt>.
-		 * Leave power as 0 and vertices as empty <tt>Set</tt> if the input
-		 * <tt>vertex</tt> is null. Otherwise, add it into the vertex set and
+		 * Leave power as 0 and vertices as empty <tt>List</tt> if the input
+		 * <tt>vertex</tt> is null. Otherwise, add it into the vertex list and
 		 * set its area as the initial power.
 		 * 
 		 * @param vertex
@@ -167,6 +170,8 @@ public abstract class Shape {
 		 * <tt>graph</tt> has smaller area to the merged <tt>graph</tt> which
 		 * has bigger area. The <tt>graph</tt> which has smaller area would be
 		 * collected by GC because these is no reference to it after the merge.
+		 * Return <tt>this</tt> directly if the input <tt>graph</tt> is null or
+		 * the same as <tt>this</tt>.
 		 * 
 		 * @param graph
 		 * @return merged graph with all vertices of both graphs.
