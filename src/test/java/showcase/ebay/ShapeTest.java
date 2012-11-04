@@ -1,6 +1,9 @@
 package showcase.ebay;
 
 import static org.junit.Assert.*;
+import static showcase.ebay.TestHelper.*;
+
+import java.util.List;
 
 import org.junit.Test;
 
@@ -10,7 +13,6 @@ import org.junit.Test;
  * 
  */
 public class ShapeTest {
-	private static final double DELTA = 0;
 
 	@Test
 	public void testConnectNull() {
@@ -32,6 +34,13 @@ public class ShapeTest {
 				connectedShape);
 		verifyNullConnection(shape1);
 		verifyPower(1, shape1);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testConnectIllegalArea() {
+		Shape shape1 = getMockShape(1);
+		Shape shape2 = getMockShape(-2);
+		shape1.connect(shape2);
 	}
 
 	@Test
@@ -81,6 +90,22 @@ public class ShapeTest {
 	}
 
 	@Test
+	public void testGetDirectConnections() {
+		Shape shape1 = getMockShape(1);
+		Shape shape2 = getMockShape(2);
+		Shape shape3 = getMockShape(3);
+
+		shape1.connect(shape3);
+		verifyDirectConnectionCount(1, shape1, shape3);
+		List<Shape> connections = shape1.getDirectConnections();
+		// This should not effect the directConnections of rectangle15
+		connections.add(shape2);
+		assertEquals("connections should have two items. ", 2,
+				connections.size());
+		verifyDirectConnectionCount(1, shape1, shape3);
+	}
+
+	@Test
 	public void testConnectExternally() {
 		Shape shape1 = getMockShape(1);
 		Shape shape2 = getMockShape(2);
@@ -126,39 +151,6 @@ public class ShapeTest {
 		shapeC.connect(shapeA);
 		shapeD.connect(shapeC);
 		verifyPower(30, shapeA, shapeB, shapeC, shapeD);
-	}
-
-	private void verifyDirectConnectionCount(int expectedCount, Shape... shapes) {
-		for (Shape shape : shapes) {
-			assertEquals(
-					"The direct connection count of the shape should be expected. ",
-					expectedCount, shape.getDirectConnections().size());
-		}
-	}
-
-	private void verifyNullConnection(Shape... shapes) {
-		for (Shape shape : shapes) {
-			assertNull(
-					"The direct connection count of the shape should be expected. ",
-					shape.getDirectConnections());
-		}
-	}
-
-	private void verifyPower(float expectedPower, Shape... shapes) {
-		for (Shape shape : shapes) {
-			assertEquals("The shape power should equals to the expected. ",
-					expectedPower, shape.getPower(), DELTA);
-		}
-	}
-
-	private Shape getMockShape(final float mockArea) {
-		Shape shape = new Shape() {
-			@Override
-			public float getArea() {
-				return mockArea;
-			}
-		};
-		return shape;
 	}
 
 }

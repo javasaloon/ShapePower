@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite failures="0" time="0.013" errors="0" skipped="0" tests="9" name="showcase.ebay.ShapeTest">
+<testsuite failures="0" time="0.005" errors="0" skipped="0" tests="7" name="showcase.ebay.RectangleTest">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.6.0_25\jre\bin"/>
@@ -60,13 +60,11 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="pentium_pro+mmx pentium_pro pentium+mmx pentium i486 i386 i86"/>
   </properties>
-  <testcase time="0" classname="showcase.ebay.ShapeTest" name="testGetPower"/>
-  <testcase time="0" classname="showcase.ebay.ShapeTest" name="testGetDirectConnections"/>
-  <testcase time="0.001" classname="showcase.ebay.ShapeTest" name="testConnectExternally"/>
-  <testcase time="0" classname="showcase.ebay.ShapeTest" name="testConnectNull"/>
-  <testcase time="0.001" classname="showcase.ebay.ShapeTest" name="testConnectItself"/>
-  <testcase time="0" classname="showcase.ebay.ShapeTest" name="testConnectIllegalArea"/>
-  <testcase time="0" classname="showcase.ebay.ShapeTest" name="testConnectRepeatly"/>
-  <testcase time="0.001" classname="showcase.ebay.ShapeTest" name="testConnectInternally"/>
-  <testcase time="0" classname="showcase.ebay.ShapeTest" name="testSampleCase"/>
+  <testcase time="0" classname="showcase.ebay.RectangleTest" name="testGetArea"/>
+  <testcase time="0.001" classname="showcase.ebay.RectangleTest" name="testRectangleIllegalWidth"/>
+  <testcase time="0" classname="showcase.ebay.RectangleTest" name="testRectangleIllegalHeight"/>
+  <testcase time="0.001" classname="showcase.ebay.RectangleTest" name="testRectangleIllegalHeightWidth"/>
+  <testcase time="0" classname="showcase.ebay.RectangleTest" name="testGetPower"/>
+  <testcase time="0" classname="showcase.ebay.RectangleTest" name="testGetDirectConnections"/>
+  <testcase time="0" classname="showcase.ebay.RectangleTest" name="testConnectExternally"/>
 </testsuite>

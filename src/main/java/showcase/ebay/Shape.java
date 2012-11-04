@@ -51,7 +51,7 @@ public abstract class Shape {
 	 * 
 	 * @return
 	 */
-	public final float getPower() {
+	public final double getPower() {
 		if (this.directConnections == null || this.directConnections.isEmpty()) {
 			return this.getArea();
 		}
@@ -79,7 +79,7 @@ public abstract class Shape {
 	 * 
 	 * @return the area value.
 	 */
-	protected abstract float getArea();
+	protected abstract double getArea();
 
 	/**
 	 * Pick powerGraph whose power is bigger.
@@ -143,7 +143,7 @@ public abstract class Shape {
 	 * 
 	 */
 	private static class PowerGraph {
-		private float power = 0;
+		private double power = 0;
 		private List<Shape> vertices = null;
 
 		/**
@@ -166,7 +166,7 @@ public abstract class Shape {
 		 * Merge with the input <tt>graph</tt>. Bind all vertices whose
 		 * <tt>graph</tt> has smaller area to the merged <tt>graph</tt> which
 		 * has bigger area. The <tt>graph</tt> which has smaller area would be
-		 * gc because these is no reference to it after the merge.
+		 * collected by GC because these is no reference to it after the merge.
 		 * 
 		 * @param graph
 		 * @return merged graph with all vertices of both graphs.
@@ -198,7 +198,7 @@ public abstract class Shape {
 		 * 
 		 * @return the power which is the biggest area among the vertices.
 		 */
-		public float getPower() {
+		public double getPower() {
 			return this.power;
 		}
 	}
